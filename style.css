@@ -1,0 +1,15 @@
+.contain{
+    width: 400px;
+    margin: 150px auto;
+}
+
+.image img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.play button{
+    width: 100%;
+}
+
