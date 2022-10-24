@@ -25,7 +25,7 @@ fetch(endpoint)
         <div class="card-text">
             <p>${data[apiData].message}</p>
             <div class="play">
-                <button class="btn btn-outline-success">Play Audio</button>
+                <button class="btn btn-play btn-outline-success">Play Audio</button>
             </div>
         </div>
     </div>`
@@ -38,7 +38,24 @@ fetch(endpoint)
     contain.innerHTML = display
 
 
+    const updateTextimonialNext =()=>{
+        let lastIndex = data.length - 1;
+        console.log(lastIndex);
+        if(apiData === lastIndex){
+            apiData = 0
+        }
+    }
+    const updateTextimonialPrev =()=>{
+        let lastIndex = data.length - 1;
+        console.log(lastIndex);
+        if(apiData === 1){
+            apiData = lastIndex
+        }
+    }
 
+    let btn_play =document.querySelector('.btn-play');
+    
+ 
 
     next.addEventListener("click", (e) => {
         e.preventDefault();
@@ -49,8 +66,27 @@ fetch(endpoint)
           let display = displayTestimonial();
           contain.innerHTML = display
           console.log(data[apiData].id);
+          updateTextimonialNext()
         }
       });
+
+    prev.addEventListener('click', () => {
+        // let lastIndex = data.length - 1;
+        if (apiData > 0 && data[apiData].id <= data.length - 1) {
+            apiData--;
+            displayTestimonial();
+            let display = displayTestimonial();
+            contain.innerHTML = display
+            console.log(data[apiData].id);
+            updateTextimonialPrev()
+          }
+    });
+
+    btn_play.addEventListener('click', ()=>{
+        audio = new Audio(`${data[apiData].audio}`);
+      audio.play();
+      console.log(`${data[apiData].id}`);
+    })
 })
 
 
